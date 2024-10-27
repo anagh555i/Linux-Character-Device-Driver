@@ -1,0 +1,115 @@
+MAKING CHARACTER DEVICE FILE WITH MAJOR NUMBER 100 AND MINOR NUMBER 0
+
+anagh@Ubuntu20:~$ sudo mknod /dev/firstdevicefile c 100 0
+[sudo] password for anagh: 
+
+anagh@Ubuntu20:~$ ls /dev
+autofs           loop3         stdout  tty39      ttyS11       vboxguest
+block            loop4         tty     tty4       ttyS12       vboxuser
+bsg              loop5         tty0    tty40      ttyS13       vcs
+btrfs-control    loop6         tty1    tty41      ttyS14       vcs1
+bus              loop7         tty10   tty42      ttyS15       vcs2
+cdrom            loop8         tty11   tty43      ttyS16       vcs3
+char             loop9         tty12   tty44      ttyS17       vcs4
+console          loop-control  tty13   tty45      ttyS18       vcs5
+core             mapper        tty14   tty46      ttyS19       vcs6
+cpu              mcelog        tty15   tty47      ttyS2        vcsa
+cpu_dma_latency  mem           tty16   tty48      ttyS20       vcsa1
+cuse             mqueue        tty17   tty49      ttyS21       vcsa2
+disk             net           tty18   tty5       ttyS22       vcsa3
+dma_heap         null          tty19   tty50      ttyS23       vcsa4
+dri              nvram         tty2    tty51      ttyS24       vcsa5
+ecryptfs         port          tty20   tty52      ttyS25       vcsa6
+fb0              ppp           tty21   tty53      ttyS26       vcsu
+fd               psaux         tty22   tty54      ttyS27       vcsu1
+firstdevicefile  ptmx          tty23   tty55      ttyS28       vcsu2
+full             pts           tty24   tty56      ttyS29       vcsu3
+fuse             random        tty25   tty57      ttyS3        vcsu4
+hidraw0          rfkill        tty26   tty58      ttyS30       vcsu5
+hpet             rtc           tty27   tty59      ttyS31       vcsu6
+hugepages        rtc0          tty28   tty6       ttyS4        vfio
+hwrng            sda           tty29   tty60      ttyS5        vga_arbiter
+i2c-0            sda1          tty3    tty61      ttyS6        vhci
+initctl          sda2          tty30   tty62      ttyS7        vhost-net
+input            sg0           tty31   tty63      ttyS8        vhost-vsock
+kmsg             sg1           tty32   tty7       ttyS9        zero
+log              shm           tty33   tty8       udmabuf      zfs
+loop0            snapshot      tty34   tty9       uhid
+loop1            snd           tty35   ttyprintk  uinput
+loop10           sr0           tty36   ttyS0      urandom
+loop11           stderr        tty37   ttyS1      userfaultfd
+loop2            stdin         tty38   ttyS10     userio
+
+anagh@Ubuntu20:~$ ls -l /dev/firstdevicefile
+crw-r--r-- 1 root root 100, 0 Oct 26 05:14 /dev/firstdevicefile
+
+anagh@Ubuntu20:~$ cat /proc/devices
+Character devices:
+  1 mem
+  4 /dev/vc/0
+  4 tty
+  4 ttyS
+  5 /dev/tty
+  5 /dev/console
+  5 /dev/ptmx
+  5 ttyprintk
+  6 lp
+  7 vcs
+ 10 misc
+ 13 input
+ 21 sg
+ 29 fb
+ 89 i2c
+ 99 ppdev
+108 ppp
+116 alsa
+128 ptm
+136 pts
+180 usb
+189 usb_device
+202 cpu/msr
+204 ttyMAX
+226 drm
+241 hidraw
+242 ttyDBC
+243 bsg
+244 watchdog
+245 remoteproc
+246 ptp
+247 pps
+248 rtc
+249 dma_heap
+250 dax
+251 dimmctl
+252 ndctl
+253 tpm
+254 gpiochip
+261 accel
+
+Block devices:
+  7 loop
+  8 sd
+  9 md
+ 11 sr
+ 65 sd
+ 66 sd
+ 67 sd
+ 68 sd
+ 69 sd
+ 70 sd
+ 71 sd
+128 sd
+129 sd
+130 sd
+131 sd
+132 sd
+133 sd
+134 sd
+135 sd
+252 device-mapper
+253 virtblk
+254 mdp
+259 blkext
+anagh@Ubuntu20:~$ 
+// DEVICE NUMBER 100 IS FREE
+

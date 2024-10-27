@@ -1,0 +1,91 @@
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ cat /proc/devices
+Character devices:
+  1 mem
+  4 /dev/vc/0
+  4 tty
+  4 ttyS
+  5 /dev/tty
+  5 /dev/console
+  5 /dev/ptmx
+  5 ttyprintk
+  6 lp
+  7 vcs
+ 10 misc
+ 13 input
+ 21 sg
+ 29 fb
+ 89 i2c
+ 99 ppdev
+108 ppp
+116 alsa
+128 ptm
+136 pts
+180 usb
+189 usb_device
+202 cpu/msr
+204 ttyMAX
+226 drm
+241 hidraw
+242 ttyDBC
+243 bsg
+244 watchdog
+245 remoteproc
+246 ptp
+247 pps
+248 rtc
+249 dma_heap
+250 dax
+251 dimmctl
+252 ndctl
+253 tpm
+254 gpiochip
+261 accel
+
+Block devices:
+  7 loop
+  8 sd
+  9 md
+ 11 sr
+ 65 sd
+ 66 sd
+ 67 sd
+ 68 sd
+ 69 sd
+ 70 sd
+ 71 sd
+128 sd
+129 sd
+130 sd
+131 sd
+132 sd
+133 sd
+134 sd
+135 sd
+252 device-mapper
+253 virtblk
+254 mdp
+259 blkext
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo insmod firstmodule.ko
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ cat /proc/devices | grep first_device_no
+100 first_device_no
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo mknod /dev/firstdevice c 100 0
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ ls /dev/firstdevice -al
+crw-r--r-- 1 root root 100, 0 Oct 26 06:17 /dev/firstdevice
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo dmesg | tail
+[ 2917.256995] audit: type=1400 audit(1729922413.885:177): apparmor="DENIED" operation="capable" class="cap" profile="/usr/lib/snapd/snap-confine" pid=4015 comm="snap-confine" capability=38  capname="perfmon"
+[ 2917.356248] audit: type=1400 audit(1729922413.986:178): apparmor="DENIED" operation="open" class="file" profile="snap-update-ns.firmware-updater" name="/proc/4039/maps" pid=4039 comm="5" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+[ 2917.547970] audit: type=1400 audit(1729922414.179:179): apparmor="DENIED" operation="open" class="file" profile="snap.firmware-updater.firmware-notifier" name="/proc/sys/vm/max_map_count" pid=4015 comm="firmware-notifi" requested_mask="r" denied_mask="r" fsuid=1000 ouid=0
+[ 3649.429274] Hello from kernel
+               Arguments passed:
+[ 3649.429286] major number:100 minor_numer:0
+[ 3676.277446] Exiting module
+[ 3842.904574] Hello from kernel
+               Arguments passed:
+[ 3842.904581] major number:100 minor_numer:0
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$

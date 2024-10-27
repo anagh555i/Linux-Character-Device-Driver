@@ -1,0 +1,53 @@
+anagh@Ubuntu20:~/Desktop/OS$ cd Firstmodule
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ ls
+firstmodule.c  Makefile
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ make
+make -C /lib/modules/6.8.0-47-generic/build M=/home/anagh/Desktop/OS/Firstmodule modules
+make[1]: Entering directory '/usr/src/linux-headers-6.8.0-47-generic'
+warning: the compiler differs from the one used to build the kernel
+  The kernel was built by: x86_64-linux-gnu-gcc-13 (Ubuntu 13.2.0-23ubuntu4) 13.2.0
+  You are using:           gcc-13 (Ubuntu 13.2.0-23ubuntu4) 13.2.0
+  CC [M]  /home/anagh/Desktop/OS/Firstmodule/firstmodule.o
+  MODPOST /home/anagh/Desktop/OS/Firstmodule/Module.symvers
+  CC [M]  /home/anagh/Desktop/OS/Firstmodule/firstmodule.mod.o
+  LD [M]  /home/anagh/Desktop/OS/Firstmodule/firstmodule.ko
+  BTF [M] /home/anagh/Desktop/OS/Firstmodule/firstmodule.ko
+Skipping BTF generation for /home/anagh/Desktop/OS/Firstmodule/firstmodule.ko due to unavailability of vmlinux
+make[1]: Leaving directory '/usr/src/linux-headers-6.8.0-47-generic'
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo insmod firstmodule.ko
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo dsmeg | tail
+sudo: dsmeg: command not found
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo dmesg | tail
+[ 4651.277449] systemd[1]: Starting systemd-journald.service - Journal Service...
+[ 4651.304861] systemd-journald[7178]: Collecting audit messages is disabled.
+[ 4651.305825] systemd-journald[7178]: File /var/log/journal/3c4d61f87a5a41b6a0e5c1703c5a843b/system.journal corrupted or uncleanly shut down, renaming and replacing.
+[ 4651.316364] systemd[1]: Started systemd-journald.service - Journal Service.
+[ 4659.535773] 14:43:30.296112 Timer    VBoxDRMClient: push screen layout data of 1 display(s) to DRM stack, fPartialLayout=false, rc=VINF_SUC
+[ 4930.643321] firstmodule: loading out-of-tree module taints kernel.
+[ 4930.643328] firstmodule: module verification failed: signature and/or required key missing - tainting kernel
+[ 4930.645495] Hello from kernel
+[ 5121.726807] Exiting module
+[ 5526.261173] Hello from kernel
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ lsmod | grep firstmodule
+firstmodule            12288  0
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo rmmod firstmodule
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo dmesg | tail
+[ 4651.304861] systemd-journald[7178]: Collecting audit messages is disabled.
+[ 4651.305825] systemd-journald[7178]: File /var/log/journal/3c4d61f87a5a41b6a0e5c1703c5a843b/system.journal corrupted or uncleanly shut down, renaming and replacing.
+[ 4651.316364] systemd[1]: Started systemd-journald.service - Journal Service.
+[ 4659.535773] 14:43:30.296112 Timer    VBoxDRMClient: push screen layout data of 1 display(s) to DRM stack, fPartialLayout=false, rc=VINF_SUC
+[ 4930.643321] firstmodule: loading out-of-tree module taints kernel.
+[ 4930.643328] firstmodule: module verification failed: signature and/or required key missing - tainting kernel
+[ 4930.645495] Hello from kernel
+[ 5121.726807] Exiting module
+[ 5526.261173] Hello from kernel
+[ 5598.821882] Exiting module
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ 

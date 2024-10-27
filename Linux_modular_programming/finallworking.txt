@@ -1,0 +1,71 @@
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ make
+make -C /lib/modules/6.8.0-47-generic/build M=/home/anagh/Desktop/OS/Firstmodule modules
+make[1]: Entering directory '/usr/src/linux-headers-6.8.0-47-generic'
+warning: the compiler differs from the one used to build the kernel
+  The kernel was built by: x86_64-linux-gnu-gcc-13 (Ubuntu 13.2.0-23ubuntu4) 13.2.0
+  You are using:           gcc-13 (Ubuntu 13.2.0-23ubuntu4) 13.2.0
+  CC [M]  /home/anagh/Desktop/OS/Firstmodule/firstmodule.o
+  MODPOST /home/anagh/Desktop/OS/Firstmodule/Module.symvers
+  CC [M]  /home/anagh/Desktop/OS/Firstmodule/firstmodule.mod.o
+  LD [M]  /home/anagh/Desktop/OS/Firstmodule/firstmodule.ko
+  BTF [M] /home/anagh/Desktop/OS/Firstmodule/firstmodule.ko
+Skipping BTF generation for /home/anagh/Desktop/OS/Firstmodule/firstmodule.ko due to unavailability of vmlinux
+make[1]: Leaving directory '/usr/src/linux-headers-6.8.0-47-generic'
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo insmod firstmodule.ko
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo dmesg | tail
+[ 1938.736694] Deviceno. allocated Major:240 minor:1
+[ 2203.242210] hrtimer: interrupt took 2401405 ns
+[ 2282.401251] Open was called
+[ 2282.433775] Close was called
+[ 2340.139696] Open was called
+[ 2340.140068] Close was called
+[ 2398.824129] Exiting module
+[ 2704.125458] Hello from kernel
+               Arguments passed:
+[ 2704.125465] major number:100 minor_numer:0
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo mknod /dev/firstdevice c 100 0
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ ls /dev/firstdevice -a;
+/dev/firstdevice
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ ls /dev/firstdevice -al
+crw-r--r-- 1 root root 100, 0 Oct 26 10:01 /dev/firstdevice
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo chmod 666 /dev/firstdevice
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ ls /dev/firstdevice -al
+crw-rw-rw- 1 root root 100, 0 Oct 26 10:01 /dev/firstdevice
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo echo "This is a test" > /dev/firstdevice
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo dmesg | tail
+[ 2282.433775] Close was called
+[ 2340.139696] Open was called
+[ 2340.140068] Close was called
+[ 2398.824129] Exiting module
+[ 2704.125458] Hello from kernel
+               Arguments passed:
+[ 2704.125465] major number:100 minor_numer:0
+[ 2890.702572] Open was called
+[ 2890.715564] Write was called
+[ 2890.717775] Close was called
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ head -n 1 /dev/firstdevice
+This is a test
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ sudo dmesg | tail
+[ 2398.824129] Exiting module
+[ 2704.125458] Hello from kernel
+               Arguments passed:
+[ 2704.125465] major number:100 minor_numer:0
+[ 2890.702572] Open was called
+[ 2890.715564] Write was called
+[ 2890.717775] Close was called
+[ 2919.060891] Open was called
+[ 2919.060900] Read was called
+[ 2919.060915] Close was called
+
+anagh@Ubuntu20:~/Desktop/OS/Firstmodule$ 
